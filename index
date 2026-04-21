@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أكاديميك برو | لخدمات الطلبة والبحوث</title>
+    
+    <!-- Tailwind CSS -->
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome للأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- خط 'Cairo' العربي -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Cairo', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#1e3a8a',
+                        secondary: '#2563eb',
+                        accent: '#22c55e',
+                        dark: '#0f172a',
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f8fafc;
+        }
+        
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        /* تصميم البطاقات المحدث مع الصور */
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.15), 0 8px 10px -6px rgba(37, 99, 235, 0.1);
+        }
+
+        .service-card.selected {
+            border-color: #2563eb;
+            background: linear-gradient(to bottom right, #ffffff, #eff6ff);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.25);
+            position: relative;
+        }
+
+        /* علامة الصح للبطاقة المحددة */
+        .check-icon {
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.3s ease;
+        }
+
+        .service-card.selected .check-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* تدوير الصورة في القسم الرئيسي */
+        .hero-image-container {
+            border-radius: 30px 100px 30px 30px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <!-- شريط التنقل -->
+    <header class="glass-nav fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-3 text-primary font-black text-2xl tracking-tight">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary text-white rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/30">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <span>أكاديميك<span class="text-secondary">برو</span></span>
+                </div>
+                <nav class="hidden md:flex gap-6">
+                    <a href="#home" class="text-slate-600 hover:text-secondary font-bold transition-colors">الرئيسية</a>
+                    <a href="#services" class="text-slate-600 hover:text-secondary font-bold transition-colors">خدماتنا</a>
+                </nav>
+                <a href="#services" class="bg-primary hover:bg-secondary text-white px-6 py-2 rounded-full font-bold transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                    اطلب الآن
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow pt-20">
+        
+        <!-- قسم البداية (Hero Section) مع صورة -->
+        <section id="home" class="relative bg-white overflow-hidden">
+            <div class="absolute top-0 right-0 w-full h-full bg-blue-50/50 -z-10"></div>
+            
+            <div class="container mx-auto px-4 py-16 lg:py-24 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <!-- النصوص -->
+                    <div class="text-right">
+                        <span class="inline-block py-1 px-3 rounded-full bg-blue-100 text-secondary font-bold text-sm mb-6 animate-float">
+                            <i class="fa-solid fa-star text-yellow-500 mr-1"></i> الخيار الأول للطلاب والباحثين
+                        </span>
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">
+                            تميز في مشاريعك بـ <br/><span class="text-gradient">لمسة احترافية</span>
+                        </h1>
+                        <p class="text-lg md:text-xl text-slate-600 mb-8 leading-relaxed font-medium max-w-lg">
+                            نحول أفكارك وجهودك الأكاديمية إلى أعمال فنية متقنة. من بوسترات المناقشة إلى أغلفة البحوث وتنسيق تقارير التخرج، نحن هنا لضمان حصولك على أعلى التقييمات.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="#services" class="bg-gradient-to-r from-primary to-secondary text-white font-bold text-lg py-4 px-8 rounded-full shadow-xl shadow-blue-500/30 hover:shadow-blue-500/50 transition-all transform hover:-translate-y-1 text-center">
+                                تصفح الخدمات
+                                <i class="fa-solid fa-arrow-down mr-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- الصورة الرئيسية -->
+                    <div class="relative hidden lg:block">
+                        <!-- أشكال خلفية ديكورية -->
+                        <div class="absolute -inset-4 bg-gradient-to-tr from-blue-100 to-indigo-50 rounded-full blur-2xl opacity-70"></div>
+                        
+                        <div class="hero-image-container border-8 border-white shadow-2xl relative z-10 animate-float transform rotate-2 hover:rotate-0 transition-transform duration-500">
+                            <!-- صورة تعبيرية لطالب أو بحث (من مكتبة الصور المجانية Unsplash) -->
+                            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="طالب جامعي" class="w-full h-[500px] object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                        </div>
+                        
+                        <!-- بطاقة صغيرة عائمة -->
+                        <div class="absolute bottom-10 -right-10 bg-white p-4 rounded-2xl shadow-xl z-20 flex items-center gap-4 animate-bounce" style="animation-duration: 4s;">
+                            <div class="w-12 h-12 bg-green-100 text-green-500 rounded-full flex items-center justify-center text-2xl">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-slate-500 font-bold">جودة مضمونة</p>
+                                <p class="text-xs text-slate-400">تقييم 100%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم الخدمات مع الصور -->
+        <section id="services" class="py-20 bg-slate-50 relative">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-black text-slate-800 mb-4">ماذا نُقدم لك؟</h2>
+                    <div class="w-24 h-1.5 bg-secondary mx-auto rounded-full mb-6"></div>
+                    <p class="text-slate-500 text-lg font-medium">اختر الخدمة التي تناسب احتياجاتك لبدء الطلب فوراً</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    
+                    <!-- الخدمة 1: البوستر -->
+                    <div class="service-card bg-white rounded-3xl border-2 border-transparent shadow-lg cursor-pointer group flex flex-col overflow-hidden" data-service="تصميم بوستر علمي / إعلاني">
+                        <!-- صورة الخدمة -->
+                        <div class="relative h-56 w-full overflow-hidden bg-slate-200">
+                            <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="تصميم بوستر" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-blue-900/20 group-hover:bg-blue-900/10 transition-colors duration-300"></div>
+                            <!-- علامة الاختيار -->
+                            <div class="check-icon absolute top-4 right-4 w-10 h-10 bg-secondary text-white rounded-full flex items-center justify-center text-xl shadow-lg z-10">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                        </div>
+                        <!-- تفاصيل الخدمة -->
+                        <div class="p-8 flex-grow flex flex-col">
+                            <div class="flex items-center gap-3 mb-3 text-secondary">
+                                <i class="fa-solid fa-image text-2xl"></i>
+                                <h3 class="text-2xl font-bold text-slate-800">تصميم بوسترات</h3>
+                            </div>
+                            <p class="text-slate-500 font-medium leading-relaxed">
+                                تصميم بوسترات علمية لمشاريع التخرج أو بوسترات إعلانية جذابة، مع ترتيب المعلومات بأسلوب بصري مريح واحترافي.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- الخدمة 2: الغلاف -->
+                    <div class="service-card bg-white rounded-3xl border-2 border-transparent shadow-lg cursor-pointer group flex flex-col overflow-hidden" data-service="تصميم غلاف بحث أو تقرير">
+                        <div class="relative h-56 w-full overflow-hidden bg-slate-200">
+                            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="تصميم غلاف" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-blue-900/20 group-hover:bg-blue-900/10 transition-colors duration-300"></div>
+                            <div class="check-icon absolute top-4 right-4 w-10 h-10 bg-secondary text-white rounded-full flex items-center justify-center text-xl shadow-lg z-10">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                        </div>
+                        <div class="p-8 flex-grow flex flex-col">
+                            <div class="flex items-center gap-3 mb-3 text-secondary">
+                                <i class="fa-solid fa-book-open text-2xl"></i>
+                                <h3 class="text-2xl font-bold text-slate-800">أغلفة البحوث</h3>
+                            </div>
+                            <p class="text-slate-500 font-medium leading-relaxed">
+                                أغلفة بتصاميم رسمية وأكاديمية تبرز عنوان بحثك واسمك وشعار جامعتك بأفضل صورة ممكنة للجان المناقشة.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- الخدمة 3: البحث والتنسيق -->
+                    <div class="service-card bg-white rounded-3xl border-2 border-transparent shadow-lg cursor-pointer group flex flex-col overflow-hidden" data-service="تنسيق وكتابة بحث تخرج">
+                        <div class="relative h-56 w-full overflow-hidden bg-slate-200">
+                            <img src="https://images.unsplash.com/photo-1456324504439-367cee3b3c32?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="تنسيق بحوث" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-blue-900/20 group-hover:bg-blue-900/10 transition-colors duration-300"></div>
+                            <div class="check-icon absolute top-4 right-4 w-10 h-10 bg-secondary text-white rounded-full flex items-center justify-center text-xl shadow-lg z-10">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                        </div>
+                        <div class="p-8 flex-grow flex flex-col">
+                            <div class="flex items-center gap-3 mb-3 text-secondary">
+                                <i class="fa-solid fa-file-signature text-2xl"></i>
+                                <h3 class="text-2xl font-bold text-slate-800">تقارير وبحوث التخرج</h3>
+                            </div>
+                            <p class="text-slate-500 font-medium leading-relaxed">
+                                تنسيق متكامل للبحوث والتقارير وفق المعايير الأكاديمية (الهوامش، الفهارس، المصادر) لتسليم عمل خالٍ من الأخطاء.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم الطلب عبر الواتساب -->
+        <section id="order-section" class="py-20 bg-white hidden opacity-0 transition-opacity duration-700">
+            <div class="container mx-auto px-4 max-w-3xl">
+                <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-100 relative">
+                    <div class="h-2 w-full bg-gradient-to-r from-accent to-green-400"></div>
+                    
+                    <div class="p-8 md:p-12">
+                        <div class="text-center mb-8">
+                            <div class="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce">
+                                <i class="fa-brands fa-whatsapp text-4xl text-accent"></i>
+                            </div>
+                            <h3 class="text-3xl font-black text-slate-800 mb-2">إتمام الطلب عبر واتساب</h3>
+                            <p class="text-slate-500 font-medium">أكمل البيانات وسنقوم بتحويلك مباشرة لمحادثتنا على الواتساب لإرسال الطلب.</p>
+                        </div>
+                        
+                        <div class="mb-8 bg-blue-50 border border-blue-100 p-5 rounded-2xl flex items-center gap-4">
+                            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm shrink-0">
+                                <i class="fa-solid fa-clipboard-check text-secondary text-xl"></i>
+                            </div>
+                            <div>
+                                <span class="block text-sm text-slate-500 font-bold mb-1">الخدمة التي اخترتها:</span>
+                                <strong id="selected-service-name" class="text-lg text-primary">...</strong>
+                            </div>
+                        </div>
+
+                        <form id="whatsappForm" class="space-y-6">
+                            <input type="hidden" id="serviceInput" value="">
+                            
+                            <div>
+                                <label for="name" class="block text-slate-700 font-bold mb-2">الاسم الثلاثي <span class="text-red-500">*</span></label>
+                                <input type="text" id="name" required class="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-accent focus:border-accent focus:bg-white outline-none transition-all text-lg" placeholder="اكتب اسمك الكامل هنا">
+                            </div>
+                            
+                            <div>
+                                <label for="details" class="block text-slate-700 font-bold mb-2">تفاصيل الطلب (اختياري)</label>
+                                <textarea id="details" rows="4" class="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-accent focus:border-accent focus:bg-white outline-none transition-all text-lg resize-none" placeholder="اكتب أي ملاحظات، عنوان البحث، أو متطلبات خاصة..."></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full bg-accent hover:bg-green-600 text-white font-bold text-xl py-4 px-6 rounded-xl shadow-lg shadow-green-500/30 transition-all flex justify-center items-center gap-3 transform hover:-translate-y-1">
+                                <i class="fa-brands fa-whatsapp text-2xl"></i>
+                                <span>إرسال الطلب عبر واتساب</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- زر الواتساب العائم -->
+    <a href="https://wa.me/9647765346667" target="_blank" class="fixed bottom-6 right-6 w-16 h-16 bg-accent text-white rounded-full flex items-center justify-center text-3xl shadow-2xl hover:scale-110 transition-transform z-50">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <footer class="bg-dark text-slate-400 py-10 border-t border-slate-800">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex items-center justify-center gap-2 text-white font-black text-xl mb-4">
+                <i class="fa-solid fa-graduation-cap"></i> أكاديميك برو
+            </div>
+            <p class="font-medium mb-4">نحن هنا لنجعل مسيرتك الأكاديمية أكثر سهولة واحترافية.</p>
+            <p class="text-sm text-slate-500">&copy; 2026 جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <!-- سكربت التفاعل -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const serviceCards = document.querySelectorAll('.service-card');
+            const orderSection = document.getElementById('order-section');
+            const selectedServiceName = document.getElementById('selected-service-name');
+            const serviceInput = document.getElementById('serviceInput');
+            const whatsappForm = document.getElementById('whatsappForm');
+
+            // رقم الواتساب
+            const myWhatsAppNumber = "9647765346667";
+
+            // التعامل مع اختيار الخدمة
+            serviceCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // إزالة التحديد السابق
+                    serviceCards.forEach(c => c.classList.remove('selected'));
+                    
+                    // تحديد البطاقة الحالية
+                    this.classList.add('selected');
+                    
+                    // أخذ اسم الخدمة
+                    const serviceName = this.getAttribute('data-service');
+                    
+                    // تحديث واجهة الفورم
+                    selectedServiceName.textContent = serviceName;
+                    serviceInput.value = serviceName;
+                    
+                    // إظهار الفورم بحركة ناعمة
+                    orderSection.classList.remove('hidden');
+                    
+                    setTimeout(() => {
+                        orderSection.classList.remove('opacity-0');
+                        // تمرير الشاشة للأسفل نحو الفورم
+                        const yOffset = -100;
+                        const element = orderSection;
+                        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                        window.scrollTo({top: y, behavior: 'smooth'});
+                        
+                        // التركيز على حقل الاسم
+                        document.getElementById('name').focus();
+                    }, 50);
+                });
+            });
+
+            // التعامل مع زر الواتساب
+            whatsappForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value.trim();
+                const service = document.getElementById('serviceInput').value;
+                const details = document.getElementById('details').value.trim();
+                
+                let message = `مرحباً بك أكاديميك برو،\nأود طلب خدمة من موقعكم.\n\n`;
+                message += `👤 *الاسم:* ${name}\n`;
+                message += `🎓 *الخدمة المطلوبة:* ${service}\n`;
+                
+                if (details !== '') {
+                    message += `📝 *التفاصيل:* ${details}\n`;
+                }
+                
+                message += `\nشكراً لكم.`;
+                
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappUrl = `https://wa.me/${myWhatsAppNumber}?text=${encodedMessage}`;
+                
+                window.open(whatsappUrl, '_blank');
+            });
+            
+            // إضافة تأثير للشريط العلوي عند التمرير
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('header');
+                if (window.scrollY > 20) {
+                    header.classList.add('shadow-md');
+                } else {
+                    header.classList.remove('shadow-md');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
